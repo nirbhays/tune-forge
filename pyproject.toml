@@ -1,0 +1,75 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tuneforge"
+version = "0.1.0"
+description = "Fine-tune, evaluate, and serve open-source LLMs in three commands."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "TuneForge Contributors"}]
+keywords = ["llm", "fine-tuning", "lora", "evaluation", "serving", "huggingface"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "click>=8.1",
+    "pydantic>=2.0",
+    "pyyaml>=6.0",
+    "rich>=13.0",
+    "structlog>=23.1",
+]
+
+[project.optional-dependencies]
+gpu = [
+    "transformers>=4.36",
+    "peft>=0.7",
+    "datasets>=2.15",
+    "accelerate>=0.25",
+    "bitsandbytes>=0.41",
+]
+dev = [
+    "pytest>=7.4",
+    "ruff>=0.1",
+    "mypy>=1.7",
+]
+
+[project.scripts]
+tuneforge = "tuneforge.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/YOUR_ORG/tuneforge"
+Documentation = "https://github.com/YOUR_ORG/tuneforge/tree/main/docs"
+Repository = "https://github.com/YOUR_ORG/tuneforge"
+Issues = "https://github.com/YOUR_ORG/tuneforge/issues"
+Changelog = "https://github.com/YOUR_ORG/tuneforge/blob/main/CHANGELOG.md"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 88
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM", "N"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
