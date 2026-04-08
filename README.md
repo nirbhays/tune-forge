@@ -153,6 +153,62 @@ ruff check src/ tests/
 mypy src/
 ```
 
+
+## Why TuneForge?
+
+Fine-tuning LLMs involves too many moving parts: LoRA configs, quantization settings, tokenizer setup, training scripts, evaluation code, serving infrastructure. TuneForge wraps it all into three commands.
+
+**No GPU required to start** — validate your entire setup locally in 30 seconds, then train on cloud when you're ready.
+
+## Installation
+
+```bash
+pip install tuneforge
+```
+
+## The Three Commands
+
+```bash
+# 1. Fine-tune
+tuneforge finetune \
+  --model meta-llama/Llama-2-7b-hf \
+  --data train.jsonl \
+  --output ./my-model
+
+# 2. Evaluate
+tuneforge evaluate \
+  --model ./my-model \
+  --eval eval.jsonl
+
+# 3. Serve
+tuneforge serve --model ./my-model --port 8000
+```
+
+That's it. Your fine-tuned model is now serving on a FastAPI endpoint.
+
+## Compared to Alternatives
+
+| | TuneForge | Axolotl | Unsloth |
+|---|---|---|---|
+| Setup complexity | Low (3 commands) | Medium (YAML config) | Medium |
+| GPU required | Optional | Yes | Yes |
+| Serving built-in | Yes | No | No |
+| Evaluation built-in | Yes | Partial | No |
+| Supports LoRA/QLoRA | Yes | Yes | Yes |
+
+## Supported Models
+
+- Llama 2 (7B, 13B, 70B)
+- Mistral 7B *(coming soon)*
+- Gemma *(coming soon)*
+- Any HuggingFace-compatible model
+
+## Project Links
+
+- 📋 [Roadmap](ROADMAP.md)
+- 🤝 [Contributing](CONTRIBUTING.md)
+- 🐛 [Issues](https://github.com/nirbhays/tune-forge/issues)
+
 ## License
 
 MIT. See [LICENSE](LICENSE).
